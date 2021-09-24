@@ -1,7 +1,7 @@
 const reverse = (str) =>
   str
     .split("")
-    .sort(function (a, b) {
+    .sort((a, b) => {
       return b.localeCompare(a);
     })
     .join("");
