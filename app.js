@@ -9,7 +9,7 @@ app.use(
     extended: true,
   })
 );
-app.use("/ps3", ps3);
+app.use("/", ps3);
 app.set("view engine", "pug");
 
 app.listen(PORT, () => {

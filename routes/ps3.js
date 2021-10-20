@@ -10,7 +10,7 @@ router.get("/", (_, res) => {
 router.get("/names/:name", (req, res) => {
   const name = req.params.name;
   res.render("index", {
-    name,
+    string: name,
   });
 });
 
