@@ -18,6 +18,8 @@
   "homepage": "https://github.com/gzheng0214/CS412#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "pug": "^3.0.2"
+    "node-fetch": "^3.0.0",
+    "pug": "^3.0.2",
+    "request": "^2.88.2"
   }
 }
