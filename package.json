@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -18,8 +18,11 @@
   "homepage": "https://github.com/gzheng0214/CS412#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "node-fetch": "^3.0.0",
+    "node-fetch": "^2.6.5",
     "pug": "^3.0.2",
     "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.14"
   }
 }

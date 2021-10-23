@@ -1,8 +1,61 @@
+doctype html
 html
   head
-    title= title
+    title Movie Searcher
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css2?family=Nunito&display=swap', type='text/css')
+    link(rel="preconnect", href="https://fonts.googleapis.com")
+    link(rel="preconnect", href="https://fonts.gstatic.com", crossorigin)
+    style.
+      html {
+        font-size: 67.5%;
+      }
+      body {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: "nunito";
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        
+      }
+      h1 {
+        font-size: 4.5rem;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        min-height: 25rem;
+        justify-content: space-between;
+      }
+      div {
+        display: flex;
+        flex-direction: column;
+      }
+      label {
+        font-size: 2rem;
+      }
+      input {
+        font-family: inherit;
+        height: 3rem;
+        font-size: 1.8rem;
+        padding: 0 0.5rem;
+      }
+      button {
+        height: 2.5rem;
+        font-family: inherit;
+      }
   body
-    if string 
-      h1= string
-    if length 
-      h3= `String length: ${length}`
+    h1 Welcome to Movie Searcher
+    form(action="", method="POST")
+      div
+        label(for="title") Title:
+        input.form.control(type="text", placeholder="Enter movie name...", name="title")
+      div 
+        label(for="year") Year:
+        input.form.control(type="text", placeholder="Optional...", name="year")
+      button.form-control(type="submit", formaction="/ps4/submit_promises") Search (Promises)
+      button.form-control(type="submit", formaction="/ps4/submit_asyncawait") Search (Async/Await)
+      button.form-control(type="submit", formaction="/ps4/submit_callback") Search (Callback)

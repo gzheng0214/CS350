@@ -1,0 +1,60 @@
+doctype html
+html
+  head
+    title=title
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css2?family=Nunito&display=swap', type='text/css')
+    link(rel="preconnect", href="https://fonts.googleapis.com")
+    link(rel="preconnect", href="https://fonts.gstatic.com", crossorigin)
+    style.
+      html {
+        font-size: 67.5%;
+      }
+      body {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: "nunito";
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+      img {
+        height: 30rem;
+      }
+      div {
+        font-size: 1.5rem;
+        margin-top: 1rem;
+        width: 50rem;
+        display: flex;
+        justify-content: center;
+      }
+      span {
+        font-weight: bold;
+      }
+      p {
+        margin: 0;
+      }
+  body
+    if error 
+      h1=error
+    else 
+      h1=`${title} (${year})`
+      img(src=poster alt=title)
+      div 
+        <span>Runtime:&nbsp;</span> #{runtime}
+      div 
+        <span>IMDb:&nbsp;</span> #{imdb}
+      div
+        <span>Rated:&nbsp;</span> #{rated}
+      div
+        <span>Country:&nbsp;</span> #{country}
+      div
+        <span>Genre:&nbsp;</span> #{genre}
+      div 
+        <p><span>Plot:&nbsp;</span>#{plot}</p>
+      
