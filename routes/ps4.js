@@ -4,6 +4,66 @@ const request = require("request");
 const config = require("../config");
 const fetch = require("node-fetch");
 
+const redis = require("redis");
+const client = redis.createClient();
+const { promisify } = require("util");
+const getAsync = promisify(client.get).bind(client);
+const existsAsync = promisify(client.exists).bind(client);
+const setAsync = promisify(client.set).bind(client);
+const expireAsync = promisify(client.expire).bind(client);
+
+client.flushdb((err, success) => {
+  if (err) {
+    throw new Error(err);
+  }
+});
+
+router.post("/cache_endpoint", async (req, res) => {
+  const title = req.body.title;
+  const year = req.body.year;
+  if (!title) {
+    res.status(400).send("Missing title!");
+  }
+  const url =
+    config.BASE_URL +
+    "?" +
+    new URLSearchParams({
+      t: title,
+      ...(year && { y: year }),
+      apikey: config.API_KEY,
+    });
+  if (await existsAsync(url)) {
+    let movieData = await getAsync(url);
+    movieData = JSON.parse(movieData);
+    const response = {
+      movieData,
+      fromCache: true,
+    };
+    res.send(response);
+  } else {
+    try {
+      const result = await fetch(url);
+      const data = await result.json();
+      if (data.Error) {
+        throw new Error(data.Error);
+      }
+      await setAsync(url, JSON.stringify(data));
+      const response = {
+        movieData: data,
+        fromCache: false,
+      };
+      await expireAsync(url, 15);
+      return res.json(response);
+    } catch (error) {
+      const response = {
+        error: error.message,
+      };
+      await setAsync(url, JSON.stringify(response));
+      return res.json({ movieData: response, fromCache: false });
+    }
+  }
+});
+
 router.post("/submit_promises", (req, res) => {
   const title = req.body.title;
   const year = req.body.year;
